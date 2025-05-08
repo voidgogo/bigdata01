@@ -1,10 +1,14 @@
 drinks = ["아이스 아메리카노", "카페 라떼", "수박 주스", "딸기 주스"]
 prices = [1500, 2500, 4000, 4200]
-
 # drinks = ["아이스 아메리카노"]
 # prices = [1500]
-total_price = 0
 amounts = [0] * len(drinks)
+total_price = 0
+
+# 할인 적용 정책
+DISCOUNT_THRESHOLD = 10000  # 할인이 적용되는 임계값 (임계값 이상이면 할인 적용)
+DISCOUNT_RATE = 0.1  # 할인율
+
 
 def apply_discount(price: int) -> float:
     """
@@ -12,7 +16,9 @@ def apply_discount(price: int) -> float:
     :param price: 할인 전 총 금액
     :return: 할인이 적용된 금액 또는 할인이 적용되지 않은 금액
     """
-    pass
+    if price >= DISCOUNT_THRESHOLD:
+        return  price * (1 - DISCOUNT_RATE)
+    return price
 
 
 def order_process(idx: int) -> None:
