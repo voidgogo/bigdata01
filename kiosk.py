@@ -28,7 +28,6 @@ def run() -> None:
             print(f"문자를 입력할 수 없습니다. 숫자를 입력해주세요")
 
 
-
 def apply_discount(price: int) -> float:
     """
     총 금액이 특정 금액(임계값)을 넘어서면 할인율을 적용하는 함수
@@ -40,10 +39,10 @@ def apply_discount(price: int) -> float:
     return price
 
 
-def get_ticket_number() -> int:
+def print_ticket_number() -> None:
     """
-    주문 번호표 처리 기능 함수
-    :return: 번호
+    주문 번호표 출력 함수
+    :return: None
     """
     try:
         with open("ticket.txt", "r") as fp:
@@ -56,7 +55,8 @@ def get_ticket_number() -> int:
     with open("ticket.txt", "w") as fp:
         fp.write(str(number))
 
-    return number
+    print(f"번호표 : {number}")
+    # return number
 
 
 def order_process(idx: int) -> None:
