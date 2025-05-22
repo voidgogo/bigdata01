@@ -64,8 +64,8 @@ def print_ticket_number() -> None:
         cur.execute('insert into ticket (number) values (?)', (number,))
     else:
         number = result[0] + 1
-        cur.execute('insert into ticket (number) values (?)', (number,))
-
+        # cur.execute('insert into ticket (number) values (?)', (number,))
+        cur.execute('update ticket set number=? where id = (select id from ticket order by number desc limit 1)', (number,))
     conn.commit()
     print(f"번호표 : {number}")
 
