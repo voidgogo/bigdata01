@@ -71,7 +71,7 @@ def print_ticket_number() -> None:
         cur.execute('insert into ticket (number, created_at) values (?, ?)', (number, now))
 
     conn.commit()
-    print(f"번호표 : {number}")
+    print(f"번호표 : {number} ({now})")
 
 
 def order_process(idx: int) -> None:
