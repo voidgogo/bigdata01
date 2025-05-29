@@ -90,22 +90,10 @@ def order_process(idx: int) -> None:
 
 def display_menu() -> str:
     """
-    날씨 부가 정보 및 음료 선택 메뉴 디스플레이 함수
+    날씨 정보 호출 및 음료 선택 메뉴 디스플레이 함수
     :return: 음료 메뉴 및 주문 종료 문자열
     """
-    url = f"https://wttr.in/suwon?format=2"
-    # url = f"https://wttr.in/suwon?&0&Q&lang=ko"
-    # url = f"https://wttr.in/suwon?format=%C+%t&lang=ko"
-    # url = f"https://naver.com/kim"  # 404 page not found
-    # url = f"https://wttr123.in/suwon?format=%C+%t&lang=ko"  # website address error
-    try:
-        response = requests.get(url)
-        if response.status_code == 200:
-            print(response.text.strip())
-        else:
-            print(f"상태 코드 : {response.status_code}")
-    except Exception as err:
-        print(f"오류 : {err}")
+    print(get_weather_info())
     print("="*30)
     menu_texts = "".join([f"{j+1}) {drinks[j]} {prices[j]}원\n" for j in range(len(drinks))])
     menu_texts = menu_texts + f"{len(drinks)+1}) 주문종료 : "
@@ -134,9 +122,21 @@ def print_receipt() -> None:
     print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
 
-def test() -> None:
+def get_weather_info() -> str:
     """
-    앞으로 추가될 키오스크 기능
-    :return:
+    날씨 정보 (https://wttr.in)
+    :return: 날씨 정보를 요약한 문자열
     """
-    pass
+    url = f"https://wttr.in/suwon?format=2"
+    # url = f"https://wttr.in/suwon?&0&Q&lang=ko"
+    # url = f"https://wttr.in/suwon?format=%C+%t&lang=ko"
+    # url = f"https://naver.com/kim"  # 404 page not found
+    # url = f"https://wttr123.in/suwon?format=%C+%t&lang=ko"  # website address error
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            return response.text.strip()  # str type
+        else:
+            return f"상태 코드 : {response.status_code}"
+    except Exception as err:
+        return f"오류 : {err}"
